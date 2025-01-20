@@ -1,0 +1,170 @@
+[
+    {
+        "name-en": "Lion",
+        "name-he": "אריה",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "The lion is a large and powerful wild cat known for its majestic appearance and social behavior.",
+        "description-he": "האריה הוא חתול פרא גדול וחזק, הידוע במראהו המלכותי ובהתנהגותו החברתית."
+    },
+    {
+        "name-en": "Elephant",
+        "name-he": "פיל",
+        "place_of_found-en": "Africa, Asia",
+        "place_of_found-he": "אפריקה, אסיה",
+        "description-en": "The elephant is the largest land animal on Earth and is known for its intelligence and long trunk.",
+        "description-he": "הפיל הוא היונק היבשתי הגדול ביותר על פני כדור הארץ, ומוכר בזכות האינטליגנציה שלו וחדקו הארוך."
+    },
+    {
+        "name-en": "Tiger",
+        "name-he": "טיגריס",
+        "place_of_found-en": "Asia",
+        "place_of_found-he": "אסיה",
+        "description-en": "The tiger is a powerful predator with striking orange fur and black stripes.",
+        "description-he": "הטיגריס הוא טורף חזק עם פרווה כתומה בולטת ופסים שחורים."
+    },
+    {
+        "name-en": "Kangaroo",
+        "name-he": "קנגורו",
+        "place_of_found-en": "Australia",
+        "place_of_found-he": "אוסטרליה",
+        "description-en": "Kangaroos are marsupials known for their powerful hind legs and pouches.",
+        "description-he": "הקנגורו הוא יונק כיס הידוע ברגליו האחוריות החזקות ובכיס הבטני שלו."
+    },
+    {
+        "name-en": "Gorilla",
+        "name-he": "גורילה",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Gorillas are large and powerful primates known for their intelligence and social structure.",
+        "description-he": "הגורילה היא קוף אדם גדול וחזק, הידוע באינטליגנציה שלו ובמבנה החברתי המורכב שלו."
+    },
+    {
+        "name-en": "Polar Bear",
+        "name-he": "דוב קוטב",
+        "place_of_found-en": "Arctic",
+        "place_of_found-he": "הקוטב הצפוני",
+        "description-en": "Polar bears are large carnivorous mammals adapted to life in the Arctic and primarily feed on seals.",
+        "description-he": "דובי הקוטב הם יונקים טורפים גדולים המותאמים לחיים בקוטב הצפוני וניזונים בעיקר מכלבי ים."
+    },
+    {
+        "name-en": "Koala",
+        "name-he": "קואלה",
+        "place_of_found-en": "Australia",
+        "place_of_found-he": "אוסטרליה",
+        "description-en": "Koalas are arboreal marsupials known for their love of eucalyptus leaves.",
+        "description-he": "הקואלות הן יונקי כיס שחיים על עצים, וידועות באהבתן לעלי אקליפטוס."
+    },
+    {
+        "name-en": "Giraffe",
+        "name-he": "ג'ירפה",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Giraffes are the tallest land animals and have long necks and legs.",
+        "description-he": "הג'ירפות הן בעלי החיים הגבוהים ביותר על היבשה, ובעלות צוואר ורגליים ארוכות במיוחד."
+    },
+    {
+        "name-en": "Panda",
+        "name-he": "פנדה",
+        "place_of_found-en": "China",
+        "place_of_found-he": "סין",
+        "description-en": "Pandas are bears known for their distinctive black and white markings and love for bamboo.",
+        "description-he": "הפנדות הן דובים הידועים בצבעיהן השחור-לבן הייחודיים ובאהבתן לבמבוק."
+    },
+    {
+        "name-en": "Cheetah",
+        "name-he": "צ'יטה",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Cheetahs are the fastest land animals and have slender bodies built for speed.",
+        "description-he": "הצ'יטות הן החיות המהירות ביותר ביבשה, ובעלות גוף צר המותאם למהירות גבוהה."
+    },
+    {
+        "name-en": "Hippopotamus",
+        "name-he": "היפופוטם",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Hippopotamuses are large semi-aquatic mammals known for their massive size and aggression.",
+        "description-he": "ההיפופוטמים הם יונקים גדולים שחיים בסביבת מים, ידועים בגודלם העצום ובהתנהגותם התוקפנית."
+    },
+    {
+        "name-en": "Chimpanzee",
+        "name-he": "שימפנזה",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Chimpanzees are highly intelligent primates and share about 98% of their DNA with humans.",
+        "description-he": "השימפנזות הן קופים אינטליגנטיים מאוד, וחולקות כ-98% מה-DNA שלהן עם בני האדם."
+    },
+    {
+        "name-en": "Red Panda",
+        "name-he": "פנדה אדומה",
+        "place_of_found-en": "Asia",
+        "place_of_found-he": "אסיה",
+        "description-en": "Red pandas are small arboreal mammals known for their distinctive reddish fur and bushy tails.",
+        "description-he": "הפנדה האדומה היא יונק קטן שחי על עצים, ומוכר בפרווה האדמדמה שלו ובזנבו השעיר."
+    },
+    {
+        "name-en": "Komodo Dragon",
+        "name-he": "דרקון קומודו",
+        "place_of_found-en": "Asia",
+        "place_of_found-he": "אסיה",
+        "description-en": "Komodo dragons are the largest lizards and are known for their deadly venomous bite.",
+        "description-he": "דרקוני קומודו הם הלטאות הגדולות ביותר, וידועים בנשיכה הארסית והקטלנית שלהם."
+    },
+    {
+        "name-en": "Orangutan",
+        "name-he": "אורנגאוטן",
+        "place_of_found-en": "Southeast Asia",
+        "place_of_found-he": "דרום-מזרח אסיה",
+        "description-en": "Orangutans are great apes known for their intelligence and distinctive reddish-brown fur.",
+        "description-he": "האורנגאוטנים הם קופי אדם גדולים, ידועים באינטליגנציה שלהם ובפרווה האדמדמה-חומה המאפיינת אותם."
+    },
+    {
+        "name-en": "Platypus",
+        "name-he": "ברווזן",
+        "place_of_found-en": "Australia",
+        "place_of_found-he": "אוסטרליה",
+        "description-en": "Platypuses are unique egg-laying mammals with a duck-like bill and webbed feet.",
+        "description-he": "הברווזנים הם יונקים נדירים המטילים ביצים, בעלי מקור דמוי ברווז ורגליים עם קרומי שחייה."
+    },
+    {
+        "name-en": "Sloth",
+        "name-he": "עצלן",
+        "place_of_found-en": "Central and South America",
+        "place_of_found-he": "אמריקה המרכזית והדרומית",
+        "description-en": "Sloths are slow-moving arboreal mammals known for their laziness and long claws.",
+        "description-he": "העצלנים הם יונקים שחיים על עצים ונעים באיטיות רבה, ידועים ב'עצלותם' ובציפורניהם הארוכות."
+    },
+    {
+        "name-en": "Pangolin",
+        "name-he": "פנגולין",
+        "place_of_found-en": "Africa, Asia",
+        "place_of_found-he": "אפריקה, אסיה",
+        "description-en": "Pangolins are unique mammals covered in protective scales and are often referred to as 'scaly anteaters'.",
+        "description-he": "הפנגולינים הם יונקים מיוחדים המכוסים קשקשים להגנה, ונקראים לעיתים 'אוכלי נמלים קשקשיים'."
+    },
+    {
+        "name-en": "Quokka",
+        "name-he": "קואקה",
+        "place_of_found-en": "Australia",
+        "place_of_found-he": "אוסטרליה",
+        "description-en": "Quokkas are small marsupials known for their adorable smiling faces and friendly nature.",
+        "description-he": "הקואקה הוא יונק כיס קטן המפורסם בחיוכו החמוד ובאופיו הידידותי."
+    },
+    {
+        "name-en": "Fennec Fox",
+        "name-he": "שועל פנק",
+        "place_of_found-en": "Africa",
+        "place_of_found-he": "אפריקה",
+        "description-en": "Fennec foxes are small foxes known for their large ears and adaptability to desert environments.",
+        "description-he": "שועלי הפנק הם שועלים קטנים הידועים באוזניהם הגדולות וביכולתם להסתגל לתנאי מדבר."
+    },
+    {
+        "name-en": "Armadillo",
+        "name-he": "ארמדיל",
+        "place_of_found-en": "Americas",
+        "place_of_found-he": "אמריקה",
+        "description-en": "Armadillos are small mammals known for their armored shells and ability to roll into a ball.",
+        "description-he": "הארמדילים הם יונקים קטנים שידועים בשריון קשיח וביכולת להתגלגל לכדור"
+    }
+]

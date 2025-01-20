@@ -18,21 +18,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/animal_desc_hint"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etAnimalPlaceOfFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="animal place"
         android:layout_marginBottom="16dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddAnimal"
-        android:backgroundTint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_animal"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack"
-        android:backgroundTint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back"/>
+        android:text="@string/back" />
 
 </LinearLayout>

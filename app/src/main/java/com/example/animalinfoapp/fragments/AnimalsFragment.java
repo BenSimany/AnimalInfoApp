@@ -2,18 +2,18 @@ package com.example.animalinfoapp.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.animalinfoapp.R;
 import com.example.animalinfoapp.models.Animal;
@@ -57,29 +57,26 @@ public class AnimalsFragment extends Fragment {
         return view;
     }
 
-    private void loadAnimalsFromFirebase(){
-        // מניחים שהמספר טלפון משמש כמזהה משתמש (או אימייל)
+    private void loadAnimalsFromFirebase() {
         SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String emailOrPhone = prefs.getString("email", null);
-        if(TextUtils.isEmpty(emailOrPhone)) {
-            // במציאות: ייתכן שרוצים להכריח חזרה ל-LoginFragment
+        if (TextUtils.isEmpty(emailOrPhone)) {
             return;
         }
 
-        // ניגשים למשתמש הספציפי ב-Realtime Database
         DatabaseReference userAnimalsRef = FirebaseDatabase.getInstance()
                 .getReference("users")
-                .child(emailOrPhone.replace(".", "_")) // דוגמה (אם הטלפון/אימייל)
+                .child(emailOrPhone.replace(".", "_"))
                 .child("animals");
 
         userAnimalsRef.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 animalsList.clear();
                 DataSnapshot snapshot = task.getResult();
-                if(snapshot != null){
-                    for(DataSnapshot ds : snapshot.getChildren()){
+                if (snapshot != null) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         Animal animal = ds.getValue(Animal.class);
-                        if(animal != null) {
+                        if (animal != null) {
                             animalsList.add(animal);
                         }
                     }

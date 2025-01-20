@@ -24,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AddAnimalFragment extends Fragment {
 
-    private EditText etName, etDescription;
+    private EditText etName, etDescription, etPlaceOfFound;
     private MaterialButton btnAdd, btnBack;
 
     @Nullable
@@ -36,30 +36,31 @@ public class AddAnimalFragment extends Fragment {
 
         etName = view.findViewById(R.id.etAnimalName);
         etDescription = view.findViewById(R.id.etAnimalDescription);
+        etPlaceOfFound = view.findViewById(R.id.etAnimalPlaceOfFound);
         btnAdd = view.findViewById(R.id.btnAddAnimal);
         btnBack = view.findViewById(R.id.btnBack);
 
         btnAdd.setOnClickListener(v -> {
             String name = etName.getText().toString().trim();
             String desc = etDescription.getText().toString().trim();
+            String placeOfFound = etPlaceOfFound.getText().toString().trim();
 
-            if(TextUtils.isEmpty(name)){
-                Toast.makeText(getContext(), getString(R.string.animal_name_required), Toast.LENGTH_SHORT).show();
-                return;
-            }
+//            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(placeOfFound)) {
+//                Toast.makeText(requireContext(), getString(R.string.), Toast.LENGTH_SHORT).show();
+//                return;
+//            }
 
-            // מזהה משתמש
             SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
             String emailOrPhone = prefs.getString("email", null);
 
-            if(!TextUtils.isEmpty(emailOrPhone)){
+            if (!TextUtils.isEmpty(emailOrPhone)) {
                 DatabaseReference userRef = FirebaseDatabase.getInstance()
                         .getReference("users")
-                        .child(emailOrPhone.replace(".", "_"))  // דוגמה
+                        .child(emailOrPhone.replace(".", "_"))
                         .child("animals");
                 String pushId = userRef.push().getKey();
-                if(pushId != null) {
-                    Animal animal = new Animal(name, desc);
+                if (pushId != null) {
+                    Animal animal = new Animal(name, placeOfFound, desc);
                     userRef.child(pushId).setValue(animal)
                             .addOnSuccessListener(unused -> {
                                 Toast.makeText(getContext(), getString(R.string.animal_added), Toast.LENGTH_SHORT).show();
