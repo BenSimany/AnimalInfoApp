@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/addAnimalLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/etAnimalName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/animal_name_hint"
-        android:layout_marginBottom="8dp" />
+        android:hint="animal_name"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etAnimalDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/animal_desc_hint"
-        android:layout_marginBottom="8dp" />
+        android:hint="animal_description"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etAnimalPlaceOfFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="animal place"
-        android:layout_marginBottom="16dp" />
+        android:hint="animal_place_of_found"
+        android:layout_marginBottom="16dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddAnimal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_animal"
-        android:layout_marginBottom="8dp" />
+        android:text="@string/add_animal"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back" />
-
+        android:text="@string/back"
+        android:layout_marginTop="8dp"/>
 </LinearLayout>

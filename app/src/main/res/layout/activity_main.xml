@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".activities.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+
+
+    <!-- ה-Navigation Host, מצביע על nav_graph.xml -->
+    <fragment
+        android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:navGraph="@navigation/nav_graph"
-        app:defaultNavHost="true" />
+        app:defaultNavHost="true"/>
 
-</LinearLayout>
+    <!-- כפתור EN/HE, למעלה-ימין -->
+    <Button
+        android:id="@+id/btnLanguageSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EN / HE"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:onClick="onLanguageSwitchClicked" />
+
+</FrameLayout>

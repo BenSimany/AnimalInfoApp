@@ -37,7 +37,7 @@
             android:id="@+id/editTextPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirm_password_hint"
+            android:hint="confirm_password_hint"
             android:inputType="textPassword"
             android:layout_marginBottom="8dp"/>
 

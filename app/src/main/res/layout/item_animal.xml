@@ -12,6 +12,7 @@
     app:cardElevation="4dp">
 
     <LinearLayout
+        android:id="@+id/itemAnimalLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,5 +31,11 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="animal description"/>
+        <TextView
+            android:id="@+id/animalPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="animal place"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
