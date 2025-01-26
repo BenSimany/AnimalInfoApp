@@ -22,6 +22,7 @@
     <string name="animal_name_hint">שם החיה</string>
     <string name="animal_desc_hint">תיאור החיה</string>
     <string name="animal_place_of_found">מקום בו נמצאת</string>
+    <string name="search_hint">חיפוש חיה</string>
 
     <!-- Buttons -->
     <string name="login">התחבר</string>

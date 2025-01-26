@@ -22,6 +22,7 @@
     <string name="animal_name_hint">Animal Name</string>
     <string name="animal_desc_hint">Animal Description</string>
     <string name="animal_place_of_found">Place of Found</string>
+    <string name="search_hint">Search Animal</string>
 
     <!-- Buttons -->
     <string name="login">Login</string>

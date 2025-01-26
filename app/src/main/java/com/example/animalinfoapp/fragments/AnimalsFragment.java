@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ public class AnimalsFragment extends Fragment {
     private ArrayList<Animal> animalsList = new ArrayList<>();
     private DatabaseReference databaseReference;
     private Button btnAddAnimal;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -49,23 +51,44 @@ public class AnimalsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_animals, container, false);
 
+
         recyclerView = view.findViewById(R.id.recyclerViewAnimals);
         btnAddAnimal = view.findViewById(R.id.btnGoToAddAnimal);
+        searchView = view.findViewById(R.id.searchViewAnimals);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        // יוצרים את ה-Adapter + מחברים אותו ל-RecyclerView
         adapter = new AnimalAdapter(requireContext(), animalsList);
         recyclerView.setAdapter(adapter);
 
-        // מעבר למסך "הוסף חיה"
+        // כפתור מעבר למסך "הוסף חיה"
         btnAddAnimal.setOnClickListener(v -> {
             Navigation.findNavController(view)
                     .navigate(R.id.action_animalsFragment_to_addAnimalFragment);
         });
 
+        // מאזינים לשינויים בטקסט בשורת החיפוש
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // לחיצה על "חפש" במקלדת
+                adapter.filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // חיפוש חי (בכל הקלדה)
+                adapter.filter(newText);
+                return false;
+            }
+        });
+
         // טוענים רשימת חיות מ-Firebase (אם יש)
         loadAnimalsFromFirebase();
 
-        // אם אין חיות כלל, נטען מ-JSON מקומי (העלאה ראשונה ל-Firebase)
+        // אם אין חיות כלל ב-Firebase, נטען פעם ראשונה מה-JSON
         uploadAnimalsToFirebaseIfEmpty();
 
         return view;
@@ -83,7 +106,9 @@ public class AnimalsFragment extends Fragment {
                         animalsList.add(animal);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                // מוודאים שכל הנתונים נטענו ב-Adapter
+                // וקוראים ל-filter("") כדי להציג הכל
+                adapter.filter("");
                 Log.d("Firebase", "Animals loaded: " + animalsList.size());
             }
 
@@ -100,11 +125,10 @@ public class AnimalsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
-                    // כבר קיימים נתונים
                     Log.d("Firebase", "Animals already exist, skipping upload from JSON.");
                     return;
                 }
-                // אחרת, נטען מה-JSON
+                // אחרת, אין חיות – נטען מ-JSON
                 List<Animal> fromJson = loadAnimalsFromJson();
                 if (fromJson == null || fromJson.isEmpty()) {
                     Log.e("Firebase", "No animals found in JSON.");
@@ -125,7 +149,6 @@ public class AnimalsFragment extends Fragment {
 
     private List<Animal> loadAnimalsFromJson() {
         try {
-            // קובץ animals.json ב-res/raw
             InputStream inputStream = getResources().openRawResource(R.raw.animals);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder jsonString = new StringBuilder();
