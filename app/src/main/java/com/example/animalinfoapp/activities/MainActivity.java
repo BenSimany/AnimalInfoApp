@@ -1,32 +1,29 @@
 package com.example.animalinfoapp.activities;
 
-import android.content.SharedPreferences;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.animalinfoapp.R;
+import com.example.animalinfoapp.utils.LocaleUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);  // ראה למטה את layout
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleUtils.setLocale(newBase, LocaleUtils.getSavedLanguage(newBase)));
     }
 
-    // כפתור EN/HE (מוגדר ב-activity_main.xml: android:onClick="onLanguageSwitchClicked")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
     public void onLanguageSwitchClicked(View view) {
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        String currentLang = prefs.getString("lang", "en");
-
-        // מחליפים בין אנגלית לעברית
-        if ("he".equals(currentLang)) {
-            prefs.edit().putString("lang", "en").apply();
-        } else {
-            prefs.edit().putString("lang", "he").apply();
-        }
-
-        // רענון (יגרום לטעינה מחדש של הפרגמנטים)
+        String current = LocaleUtils.getSavedLanguage(this);
+        String next = current.equals("en") ? "he" : "en";
+        LocaleUtils.saveLanguage(this, next);
         recreate();
     }
 }

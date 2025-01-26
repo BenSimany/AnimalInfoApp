@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_login.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -33,6 +33,5 @@
         android:id="@+id/btnGoToRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="register"/>
-
+        android:text="@string/register"/>
 </LinearLayout>

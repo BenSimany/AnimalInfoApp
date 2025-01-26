@@ -11,21 +11,21 @@
         android:id="@+id/etAnimalName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="animal_name"
+        android:hint="@string/animal_name_hint"
         android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etAnimalDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="animal_description"
+        android:hint="@string/animal_desc_hint"
         android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etAnimalPlaceOfFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="animal_place_of_found"
+        android:hint="@string/animal_place_of_found"
         android:layout_marginBottom="16dp"/>
 
     <com.google.android.material.button.MaterialButton

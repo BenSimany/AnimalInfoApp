@@ -23,19 +23,19 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="animal name" />
+            android:text="@string/animal_name_hint" />
 
         <TextView
             android:id="@+id/animalDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="animal description"/>
+            android:text="@string/animal_desc_hint"/>
         <TextView
             android:id="@+id/animalPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="animal place"/>
+            android:text="@string/animal_place_of_found"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -21,14 +21,13 @@
     <string name="phone_hint">Phone</string>
     <string name="animal_name_hint">Animal Name</string>
     <string name="animal_desc_hint">Animal Description</string>
+    <string name="animal_place_of_found">Place of Found</string>
 
     <!-- Buttons -->
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="add_animal">Add Animal</string>
     <string name="back">Back</string>
-
-
-<string name="show" translatable="false"> Placeholder for show messages</string>
+    <string name="language_switch">EN/HE</string>
 
 </resources>

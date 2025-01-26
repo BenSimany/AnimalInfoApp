@@ -53,8 +53,6 @@ public class AnimalsFragment extends Fragment {
         btnAddAnimal = view.findViewById(R.id.btnGoToAddAnimal);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        // יוצרים Adapter ומצמידים אותו
         adapter = new AnimalAdapter(requireContext(), animalsList);
         recyclerView.setAdapter(adapter);
 
@@ -64,10 +62,10 @@ public class AnimalsFragment extends Fragment {
                     .navigate(R.id.action_animalsFragment_to_addAnimalFragment);
         });
 
-        // טוענים חיות מ-Firebase (אם יש)
+        // טוענים רשימת חיות מ-Firebase (אם יש)
         loadAnimalsFromFirebase();
 
-        // אם אין כלום ב-Firebase - מעלים מה-JSON
+        // אם אין חיות כלל, נטען מ-JSON מקומי (העלאה ראשונה ל-Firebase)
         uploadAnimalsToFirebaseIfEmpty();
 
         return view;
@@ -98,16 +96,15 @@ public class AnimalsFragment extends Fragment {
 
     private void uploadAnimalsToFirebaseIfEmpty() {
         databaseReference = FirebaseDatabase.getInstance().getReference("animals");
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
-                    // כבר יש נתונים
+                    // כבר קיימים נתונים
                     Log.d("Firebase", "Animals already exist, skipping upload from JSON.");
                     return;
                 }
-                // אחרת טוענים מה-JSON
+                // אחרת, נטען מה-JSON
                 List<Animal> fromJson = loadAnimalsFromJson();
                 if (fromJson == null || fromJson.isEmpty()) {
                     Log.e("Firebase", "No animals found in JSON.");
@@ -128,7 +125,7 @@ public class AnimalsFragment extends Fragment {
 
     private List<Animal> loadAnimalsFromJson() {
         try {
-            // קובץ animals.json בתיקיית res/raw/
+            // קובץ animals.json ב-res/raw
             InputStream inputStream = getResources().openRawResource(R.raw.animals);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder jsonString = new StringBuilder();

@@ -47,7 +47,7 @@ public class AddAnimalFragment extends Fragment {
             String place = etPlaceOfFound.getText().toString().trim();
 
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(desc) || TextUtils.isEmpty(place)) {
-                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -67,7 +67,7 @@ public class AddAnimalFragment extends Fragment {
                 newAnimal.setPlaceOfFoundEn(place);
             }
 
-            // מי המשתמש המחובר? (נניח שמור ב-SharedPreferences "UserPrefs")
+            // בודקים אם המשתמש מחובר
             SharedPreferences userPrefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
             String emailOrPhone = userPrefs.getString("email", null);
             if (TextUtils.isEmpty(emailOrPhone)) {
@@ -75,18 +75,8 @@ public class AddAnimalFragment extends Fragment {
                 return;
             }
 
-            //אם נרצה שהחיה תהיה לא גלובלית אלא פר משתמש זה הקוד התקין
-//            // מעלים את החיה ל- users/{userKey}/animals
-//            String userKey = emailOrPhone.replace(".", "_");
-//            DatabaseReference ref = FirebaseDatabase.getInstance()
-//                    .getReference("users")
-//                    .child(userKey)
-//                    .child("animals");
-
-            // שמירה בצומת הגלובלי "animals":
-            DatabaseReference ref = FirebaseDatabase.getInstance()
-                    .getReference("animals");
-
+            // שמירה גלובלית בצומת "animals"
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("animals");
             String pushId = ref.push().getKey();
             if (pushId == null) {
                 Toast.makeText(requireContext(), "Failed to get push key.", Toast.LENGTH_SHORT).show();

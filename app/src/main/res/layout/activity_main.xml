@@ -8,8 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-
-
     <!-- ה-Navigation Host, מצביע על nav_graph.xml -->
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -24,9 +22,9 @@
         android:id="@+id/btnLanguageSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EN / HE"
         android:layout_gravity="top|end"
         android:layout_margin="16dp"
-        android:onClick="onLanguageSwitchClicked" />
+        android:onClick="onLanguageSwitchClicked"
+        android:text="@string/language_switch" />
 
 </FrameLayout>
