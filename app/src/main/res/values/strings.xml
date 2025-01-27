@@ -26,6 +26,7 @@
 
     <!-- Buttons -->
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="register">Register</string>
     <string name="add_animal">Add Animal</string>
     <string name="back">Back</string>

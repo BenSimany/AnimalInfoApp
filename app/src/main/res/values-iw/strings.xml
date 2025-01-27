@@ -26,6 +26,7 @@
 
     <!-- Buttons -->
     <string name="login">התחבר</string>
+    <string name="logout">התנתק</string>
     <string name="register">הירשם</string>
     <string name="add_animal">הוסף חיה</string>
     <string name="back">חזרה</string>

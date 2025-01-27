@@ -1,5 +1,7 @@
 package com.example.animalinfoapp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +42,7 @@ public class AnimalsFragment extends Fragment {
     private AnimalAdapter adapter;
     private ArrayList<Animal> animalsList = new ArrayList<>();
     private DatabaseReference databaseReference;
-    private Button btnAddAnimal;
+    private Button btnAddAnimal, btnLogout;
     private SearchView searchView;
 
     @Nullable
@@ -90,6 +92,17 @@ public class AnimalsFragment extends Fragment {
 
         // אם אין חיות כלל ב-Firebase, נטען פעם ראשונה מה-JSON
         uploadAnimalsToFirebaseIfEmpty();
+        btnLogout      = view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> {
+            // מחיקת נתוני המשתמש מ-SharedPreferences
+            SharedPreferences preferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear(); // מוחק את כל הנתונים
+            editor.apply();
+
+            // מעבר למסך ההתחברות
+            Navigation.findNavController(v).navigate(R.id.action_animalsFragment_to_loginFragment);
+        });
 
         return view;
     }

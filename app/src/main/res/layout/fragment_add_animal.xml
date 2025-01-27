@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- שם החיה -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:onClick="onLogoutClicked"
+        app:cornerRadius="20dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- תיאור החיה -->
     <EditText
