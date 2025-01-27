@@ -20,6 +20,12 @@ public class Animal {
     @SerializedName("place_of_found-he")
     private String placeOfFoundHe;
 
+    // --------------------------------------------
+    // 1) שדה חדש עבור שם התמונה ב-drawable
+    // --------------------------------------------
+    @SerializedName("imageName")
+    private String imageName;
+
     // דרוש לפיירבייס
     public Animal() {
     }
@@ -35,6 +41,7 @@ public class Animal {
         this.placeOfFoundHe = placeOfFoundHe;
     }
 
+    // גטרים וסטרים לשדות הקיימים
     public String getNameEn() {
         return nameEn;
     }
@@ -75,5 +82,15 @@ public class Animal {
     }
     public void setPlaceOfFoundHe(String placeOfFoundHe) {
         this.placeOfFoundHe = placeOfFoundHe;
+    }
+
+    // --------------------------------------------
+    // 2) גטר וסטר לשדה החדש imageName
+    // --------------------------------------------
+    public String getImageName() {
+        return imageName;
+    }
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

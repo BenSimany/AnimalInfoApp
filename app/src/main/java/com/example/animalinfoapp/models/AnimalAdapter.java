@@ -5,9 +5,12 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.animalinfoapp.R;
 
 import java.util.ArrayList;
@@ -17,16 +20,16 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> {
 
-    private final List<Animal> originalList;  // רשימה מקורית
-    private final List<Animal> filteredList;  // רשימה למסך (אחרי סינון)
+    private final List<Animal> originalList;  // הרשימה המקורית
+    private final List<Animal> filteredList;  // רשימה אחרי סינון
     private final String currentLang;
 
     public AnimalAdapter(Context context, List<Animal> animals) {
-        // originalList מצביעת על אותה רשימה שבאה מה-Fragment
+        // originalList מצביעה על אותה רשימה שמגיעה מה-Fragment
         this.originalList = animals;
         this.filteredList = new ArrayList<>(animals);
 
-        // קוראים את השפה הנוכחית (ברירת מחדל - en)
+        // קריאת השפה הנוכחית (ברירת מחדל en)
         SharedPreferences prefs = context.getSharedPreferences("AppPrefs", MODE_PRIVATE);
         currentLang = prefs.getString("lang", "en");
     }
@@ -41,9 +44,10 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
+        // מקבלים את האובייקט הנוכחי מתוך הרשימה המסוננת
         Animal animal = filteredList.get(position);
 
-        // מציגים שם, תיאור ומקום-מציאה לפי שפה נוכחית
+        // קובעים שם, תיאור ומקום-מציאה לפי השפה
         if ("he".equals(currentLang)) {
             holder.nameTextView.setText(animal.getNameHe());
             holder.descriptionTextView.setText(animal.getDescriptionHe());
@@ -53,6 +57,35 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
             holder.descriptionTextView.setText(animal.getDescriptionEn());
             holder.placeTextView.setText(animal.getPlaceOfFoundEn());
         }
+
+        // -----------------------------------------------------
+        // 1) שליפת השם של התמונה מהאובייקט (imageName)
+        // -----------------------------------------------------
+        String imageName = animal.getImageName();
+
+        // -----------------------------------------------------
+        // 2) בדיקה אם imageName ריק או null:
+        //    אם כן, נשים תמונה ברירת מחדל (ic_default_image)
+        // -----------------------------------------------------
+        if (imageName == null || imageName.trim().isEmpty()) {
+            holder.animalImageView.setImageResource(R.drawable.tiger);
+        } else {
+            // יש שם: מנסים למצוא את ה-resource ב-drawable
+            int resourceId = holder.itemView.getContext()
+                    .getResources()
+                    .getIdentifier(
+                            imageName,
+                            "drawable",
+                            holder.itemView.getContext().getPackageName()
+                    );
+
+            if (resourceId != 0) {
+                holder.animalImageView.setImageResource(resourceId);
+            } else {
+                // אם לא נמצא תואם ב-drawable, נשתמש בברירת מחדל
+                holder.animalImageView.setImageResource(R.drawable.kangaroo);
+            }
+        }
     }
 
     @Override
@@ -60,8 +93,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         return filteredList.size();
     }
 
-    // פונקציית הסינון
-    // מחפשים גם בעברית וגם באנגלית
+    // פונקציית הסינון (מחפשים בשמות/תיאורים גם בעברית וגם באנגלית)
     public void filter(String query) {
         query = query.toLowerCase().trim();
         filteredList.clear();
@@ -76,7 +108,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
                 String nameEn = (a.getNameEn() == null) ? "" : a.getNameEn().toLowerCase();
                 String descEn = (a.getDescriptionEn() == null) ? "" : a.getDescriptionEn().toLowerCase();
 
-                // אם שם/תיאור בעברית או באנגלית מכילים את הטקסט שחופשים
+                // אם שם/תיאור בעברית או באנגלית מכילים את הטקסט שמחפשים
                 if (nameHe.contains(query) || descHe.contains(query)
                         || nameEn.contains(query) || descEn.contains(query)) {
                     filteredList.add(a);
@@ -88,12 +120,17 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     static class AnimalViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, descriptionTextView, placeTextView;
+        ImageView animalImageView;
 
         public AnimalViewHolder(@NonNull View itemView) {
             super(itemView);
+
             nameTextView        = itemView.findViewById(R.id.animalName);
             descriptionTextView = itemView.findViewById(R.id.animalDescription);
             placeTextView       = itemView.findViewById(R.id.animalPlace);
+
+            // מצביע ל-ImageView ב-layout
+            animalImageView     = itemView.findViewById(R.id.animalImage);
         }
     }
 }
