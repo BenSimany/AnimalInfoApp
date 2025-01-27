@@ -30,54 +30,73 @@ public class AddAnimalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_add_animal, container, false);
 
-        etName = view.findViewById(R.id.etAnimalName);
-        etDescription = view.findViewById(R.id.etAnimalDescription);
+        etName         = view.findViewById(R.id.etAnimalName);
+        etDescription  = view.findViewById(R.id.etAnimalDescription);
         etPlaceOfFound = view.findViewById(R.id.etAnimalPlaceOfFound);
-        btnAdd = view.findViewById(R.id.btnAddAnimal);
-        btnBack = view.findViewById(R.id.btnBack);
+        btnAdd         = view.findViewById(R.id.btnAddAnimal);
+        btnBack        = view.findViewById(R.id.btnBack);
 
         btnAdd.setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            String desc = etDescription.getText().toString().trim();
-            String placeOfFound = etPlaceOfFound.getText().toString().trim();
+            String name  = etName.getText().toString().trim();
+            String desc  = etDescription.getText().toString().trim();
+            String place = etPlaceOfFound.getText().toString().trim();
 
-//            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(placeOfFound)) {
-//                Toast.makeText(requireContext(), getString(R.string.), Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-
-            SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            String emailOrPhone = prefs.getString("email", null);
-
-            if (!TextUtils.isEmpty(emailOrPhone)) {
-                DatabaseReference userRef = FirebaseDatabase.getInstance()
-                        .getReference("users")
-                        .child(emailOrPhone.replace(".", "_"))
-                        .child("animals");
-                String pushId = userRef.push().getKey();
-                if (pushId != null) {
-                    Animal animal = new Animal(name, placeOfFound, desc);
-                    userRef.child(pushId).setValue(animal)
-                            .addOnSuccessListener(unused -> {
-                                Toast.makeText(getContext(), getString(R.string.animal_added), Toast.LENGTH_SHORT).show();
-                                Navigation.findNavController(view)
-                                        .navigate(R.id.action_addAnimalFragment_to_animalsFragment);
-                            })
-                            .addOnFailureListener(e ->
-                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show()
-                            );
-                }
-            } else {
-                Toast.makeText(getContext(), getString(R.string.user_not_logged_in), Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(desc) || TextUtils.isEmpty(place)) {
+                Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // קוראים את השפה הנוכחית
+            SharedPreferences appPrefs = requireContext().getSharedPreferences("AppPrefs", MODE_PRIVATE);
+            String currentLang = appPrefs.getString("lang", "en");
+
+            // בונים אובייקט חיה עם השדות הרצויים
+            Animal newAnimal = new Animal();
+            if ("he".equals(currentLang)) {
+                newAnimal.setNameHe(name);
+                newAnimal.setDescriptionHe(desc);
+                newAnimal.setPlaceOfFoundHe(place);
+            } else {
+                newAnimal.setNameEn(name);
+                newAnimal.setDescriptionEn(desc);
+                newAnimal.setPlaceOfFoundEn(place);
+            }
+
+            // בודקים אם המשתמש מחובר
+            SharedPreferences userPrefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            String emailOrPhone = userPrefs.getString("email", null);
+            if (TextUtils.isEmpty(emailOrPhone)) {
+                Toast.makeText(requireContext(), getString(R.string.user_not_logged_in), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // שמירה גלובלית בצומת "animals"
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("animals");
+            String pushId = ref.push().getKey();
+            if (pushId == null) {
+                Toast.makeText(requireContext(), "Failed to get push key.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            ref.child(pushId).setValue(newAnimal)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(requireContext(), getString(R.string.animal_added), Toast.LENGTH_SHORT).show();
+                        // חוזרים לרשימת החיות
+                        Navigation.findNavController(view).navigate(R.id.action_addAnimalFragment_to_animalsFragment);
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show()
+                    );
         });
 
         btnBack.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_addAnimalFragment_to_animalsFragment);
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_addAnimalFragment_to_animalsFragment);
         });
 
         return view;

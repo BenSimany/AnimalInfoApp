@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
 import com.example.animalinfoapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,9 +26,7 @@ public class loginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private EditText etEmail, etPassword;
 
-    public loginFragment() {
-        // Required empty public constructor
-    }
+    public loginFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,37 +41,33 @@ public class loginFragment extends Fragment {
                              @NonNull Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        etEmail = view.findViewById(R.id.editTextEmail);
+        etEmail    = view.findViewById(R.id.editTextEmail);
         etPassword = view.findViewById(R.id.editTextPassword);
-        Button btnLogin = view.findViewById(R.id.btnLogin);
-        Button btnRegister = view.findViewById(R.id.btnGoToRegister);
+        Button btnLogin     = view.findViewById(R.id.btnLogin);
+        Button btnRegister  = view.findViewById(R.id.btnGoToRegister);
 
-        // מעבר למסך רישום
         btnRegister.setOnClickListener(v -> {
             Navigation.findNavController(view)
                     .navigate(R.id.action_loginFragment_to_registerFragment);
         });
 
-        // התחברות
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
-            String pass = etPassword.getText().toString().trim();
+            String pass  = etPassword.getText().toString().trim();
 
-            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)){
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)) {
                 Toast.makeText(getContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             mAuth.signInWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(task -> {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            if(user != null){
-                                // שמירת אימייל בהעדפות מקומיות לדוגמה
+                            if (user != null) {
+                                // שמירת אימייל בהעדפות מקומיות
                                 SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("email", email);
-                                editor.apply();
+                                prefs.edit().putString("email", email).apply();
 
                                 Toast.makeText(getContext(), getString(R.string.login_success), Toast.LENGTH_SHORT).show();
 
@@ -80,8 +76,9 @@ public class loginFragment extends Fragment {
                                         .navigate(R.id.action_loginFragment_to_animalsFragment);
                             }
                         } else {
-                            Toast.makeText(getContext(), getString(R.string.login_failed)
-                                    + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),
+                                    getString(R.string.login_failed) + task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
         });
