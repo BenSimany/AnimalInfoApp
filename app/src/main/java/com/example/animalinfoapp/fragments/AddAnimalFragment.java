@@ -1,11 +1,13 @@
 package com.example.animalinfoapp.fragments;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AddAnimalFragment extends Fragment {
 
     private EditText etName, etDescription, etPlaceOfFound;
-    private MaterialButton btnAdd, btnBack;
+    private Button btnAdd, btnBack ,btnLogout;
 
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class AddAnimalFragment extends Fragment {
         etPlaceOfFound = view.findViewById(R.id.etAnimalPlaceOfFound);
         btnAdd         = view.findViewById(R.id.btnAddAnimal);
         btnBack        = view.findViewById(R.id.btnBack);
+        btnLogout      = view.findViewById(R.id.btnLogout);
 
         btnAdd.setOnClickListener(v -> {
             String name  = etName.getText().toString().trim();
@@ -98,7 +101,16 @@ public class AddAnimalFragment extends Fragment {
             Navigation.findNavController(view)
                     .navigate(R.id.action_addAnimalFragment_to_animalsFragment);
         });
+        btnLogout.setOnClickListener(v -> {
+            // מחיקת נתוני המשתמש מ-SharedPreferences
+            SharedPreferences preferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear(); // מוחק את כל הנתונים
+            editor.apply();
 
+            // מעבר למסך ההתחברות
+            Navigation.findNavController(v).navigate(R.id.action_addAnimalFragment_to_loginFragment);
+        });
         return view;
     }
 }
