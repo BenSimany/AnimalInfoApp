@@ -19,6 +19,8 @@
         android:layout_marginTop="8dp"
         android:elevation="4dp"
         android:queryHint="@string/search_hint"
+        android:background="#7EFFFFFF"
+        android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btnLogout"

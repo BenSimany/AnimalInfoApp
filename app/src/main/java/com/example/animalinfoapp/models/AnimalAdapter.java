@@ -68,7 +68,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         //    אם כן, נשים תמונה ברירת מחדל (ic_default_image)
         // -----------------------------------------------------
         if (imageName == null || imageName.trim().isEmpty()) {
-            holder.animalImageView.setImageResource(R.drawable.tiger);
+            holder.animalImageView.setImageResource(R.drawable.default_image);
         } else {
             // יש שם: מנסים למצוא את ה-resource ב-drawable
             int resourceId = holder.itemView.getContext()
